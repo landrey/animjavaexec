@@ -1,0 +1,243 @@
+for(LocalVariable lv:sf.location().method().arguments()){
+						try {
+							display=(lv.isArgument()?"PARAM:":"VAR: ")+lv.name()+":+"+lv.typeName()+"=";
+							ValueAccess.access(sf.getValue(lv), displayValue); 
+							display+=displayValue.display;
+						}catch (IllegalArgumentException iae){
+							Sytem.out.println(
+						}
+					}
+					for(LocalVariable lv:sf.location().method().variables()){
+						display=(lv.isArgument()?"PARAM:":"VAR: ")+lv.name()+":+"+lv.typeName()+"=";
+						ValueAccess.access(sf.getValue(lv), displayValue); 
+						display+=displayValue.display;
+					}
+				} catch (AbsentInformationException e) {
+					e.printStackTrace(); // TODO/ log
+				}
+				
+				
+				
+				// ------------------- Stack
+				private StackModificationEvent checkParams(StackModificationEvent modifs,
+			int stacki, LocalVariable lv, Value value) {
+		String strValue=null;
+		Object ref=null;
+		if (value==null){
+			strValue="null";
+		}else if ((value instanceof PrimitiveValue)||(value instanceof StringReference)){
+			strValue=value.toString();
+		}else{
+			// TODO: check not supported cases.
+			ref=value;
+		}
+		StackParamElt candidate=new StackParamElt(lv.name(), strValue, ref);
+		if (modifs==null){
+			if ((stacki<eltCount) && elts.get(stacki).equals(candidate)){
+				// current elt is unchanged and stack has not been changed from bottom...
+				return null;
+			}else{
+				// first change
+				StackModificationEvent result=scrap(stacki); // BEWARE ORDER, old elts[stacki] must appear in modification event.
+				elts.add(candidate);
+				return result;
+			}
+		}else{
+			elts.add(candidate);
+			return modifs;
+		}
+	}
+
+
+	private StackModificationEvent checkReturn(StackModificationEvent modifs, int stacki, ObjectReference or){
+		if ((modifs==null)){
+			if ((stacki<eltCount) && (elts.get(stacki).isReturn()) && (elts.get(stacki).getRef()==or)){
+				// current elt is unchanged and stack has not been changed from bottom...
+				return null;
+			}else{
+				// first change
+				StackModificationEvent result=scrap(stacki); // BEWARE ORDER, old elts[stacki] must appear in modification event.
+				elts.add(new StackReturnElt(or));
+				return result; 
+			}
+		}else{
+			elts.add(new StackReturnElt(or));
+			return modifs;
+		}			
+	}
+
+
+	private StackModificationEvent scrap(int stacki) {
+		StackElt[] removed=new StackElt[eltCount-stacki];
+		for(int i=0; i<eltCount-stacki; ++i){
+			removed[0]=elts.get(stacki+i);
+		}
+		for (int i=stacki; i<eltCount; ++i){
+			elts.remove(i);
+		}
+		return new StackModificationEvent(removed, stacki);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	try {
+					ObjectReference thisO=e.thread().frame(0).thisObject();
+					if (thisO!=null && !gm.contains(thisO)){
+						System.out.println("POUET==========="+this.hashCode());
+						gm.beginUpdate();
+						try{
+							//gm.add(gc, new mxCell(thisO), 0);
+							Object p=graph.getDefaultParent();
+							Object o=graph.insertVertex(p, Long.toString(thisO.uniqueID()), thisO, 10, 10, 300, 20, null);
+							Object edg=graph.insertEdge(p, "e1", null, p, o, null);
+						}finally{
+							gm.endUpdate();
+						}
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					public void pouet(){
+		Map<DefaultGraphCell, Map<?, ?>> attributes = new Hashtable<DefaultGraphCell, Map<?, ?>>();
+		DefaultGraphCell e1 = new DefaultGraphCell("Element 1");
+		AttributeMap a1=new AttributeMap();
+		JGraph.createBounds(a1, 20, 100, Color.blue);
+		//a1.put(GraphConstants.EDITABLE, Boolean.FALSE);
+		//a1.put(GraphConstants.SELECTABLE, Boolean.FALSE);
+		GraphConstants.setEditable(a1, false);
+		GraphConstants.setSelectable(a1, false);
+		attributes.put(e1,a1);
+		
+		System.out.println(attributes);
+		DefaultGraphCell e2 = new DefaultGraphCell("Element 2");
+		AttributeMap a2=new AttributeMap();
+		GraphConstants.setEditable(a2, false);
+		GraphConstants.setSelectable(a2, false);
+		attributes.put(e2, JGraph.createBounds(a2, 20, 180,
+				Color.red));
+		DefaultGraphCell grp = new DefaultGraphCell("Group");
+		AttributeMap agrp=new AttributeMap();
+		GraphConstants.setEditable(agrp, false);
+		GraphConstants.setSelectable(agrp, false);
+		attributes.put(grp, agrp);
+		grp.add(e1);
+		grp.add(e2);
+		graph.getModel().insert(new Object[]{grp, e1, e2}, attributes, null, null, null);
+		System.out.println(graph.getAttributes(e1));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		ActionListener stepListener=new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				st.getVm().resume();
+				execModel.getStateManager().setNeedStep(false);
+			}
+		};
+		cp.addStepButtonActionListener(stepListener);
+		sf.addStepButtonActionListener(stepListener);
+		ActionListener quitListener=new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		};
+		cp.addQuitButtonActionListener(quitListener);
+		sf.addQuitButtonActionListener(quitListener);
+	
+		
+		ActionListener runListener=new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				runExec(((ClassToRunProvider)e.getSource()).getClassToRun());
+			}
+		};
+		cp.addRunButtonActionListener(runListener);
+		sf.addRunButtonActionListener(runListener);
+		
+		ActionListener abortListener=new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				abort();
+			}
+		};
+		
+		cp.addAbortButtonActionListener(abortListener);
+		sf.addAbortButtonActionListener(abortListener);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		-----------------------------------------------------------
+		
+	private class GraphPanel extends JPanel  {
+		private static final long serialVersionUID = 1L;
+	
+		private  GraphPanel(JGraph g, int c, int r) {
+			super(new GridBagLayout());
+			JScrollPane scrollPane = new JScrollPane(graph);
+			scrollPane.setPreferredSize(new Dimension(c*10, r*10));
+			//Add Components to this panel.
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.gridwidth = GridBagConstraints.REMAINDER;
+
+			//c.fill = GridBagConstraints.HORIZONTAL;
+			//add(textField, c);
+
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.weightx = 1.0;
+			gbc.weighty = 1.0;
+			add(scrollPane, gbc);
+		}
+	}
+	-------------------------------------------------------------------------
+	 
