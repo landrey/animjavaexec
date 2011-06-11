@@ -11,3 +11,9 @@ nbproject/private/
 *.DS_Store
 *.swp
 *.out
+
+# Eclipse Stuff
+.classpath
+.project
+.pydevproject
+.settings
