@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view;
+package fr.loria.madynes.animjavaexec.jgraphview;
 
 import java.awt.Color;
 import java.text.MessageFormat;

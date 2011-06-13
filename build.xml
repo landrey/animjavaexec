@@ -1,0 +1,53 @@
+<project name="animjavaexec" basedir="." default="main">
+	<property name="src.dir"	value="src"/>
+	<property name="bin.dir"   	value="bin"/>
+	<property name="jar.dir"    value="${bin.dir}/jar"/>
+	<property name="main-class" value="fr.loria.madynes.animjavaexec.Main"/>
+
+
+	<target name="compile" depends="resources">
+		<mkdir dir="${classes.dir}"/>
+	    <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+	</target>
+
+	<target name="resources">
+		<copy todir="${bin.dir}/images">
+		    <fileset dir="images" />
+		  </copy>
+		<copy   file = "${src.dir}/fr/loria/madynes/animjavaexec/resources.properties"
+				todir="${bin.dir}/fr/loria/madynes/animjavaexec"/>
+		<!--Defaut Messages bundle us US (the only one for now.
+			TODO: translate and add a property to select default language. -->
+		<copy   file = "${src.dir}/fr/loria/madynes/animjavaexec/MessagesBundle_en.properties"
+				tofile="${bin.dir}/fr/loria/madynes/animjavaexec/MessagesBundle.properties"/>
+		<!-- Copy all available languages messages bundles -->
+		<copy  todir="${bin.dir}/fr/loria/madynes/animjavaexec">
+			<fileset dir="${src.dir}/fr/loria/madynes/animjavaexec">
+				<include name="MessagesBundle*.properties"/>
+			</fileset>
+		</copy>
+	</target>	
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+	  		<fileset dir="${bin.dir}" includes="**/*"/>
+	 	</delete>
+	</target>
+	
+
+    <target name="tools">
+    	<available  classname="com.sun.jdi.VirtualMachine" property="test.prop"/>
+		<echo message="Test: ${test.prop}">
+			Test: ${test.prop}
+		</echo>
+    	<!-- <echoproperties></echoproperties> -->
+    </target>
+
+	<javac srcdir="${src.dir}"
+	         destdir="${bin.dir}"
+	         debug="on"
+	  />
+    <!-- classpath="xyz.jar" -->
+	<target name="main" depends="clean"/>
+</project>
+

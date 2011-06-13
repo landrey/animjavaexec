@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -26,9 +26,9 @@ public abstract class NameNotFixedValueView extends NameValueViewAbstract {
 	private static final long serialVersionUID = 1L;
 
 	private static MessageFormat objectInstanceFormat=
-        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.NameValueView.objectInstanceFormat"));
-	private static String nullText=Properties.getMessage("fr.loria.madynes.animjavaexec.view2.NameValueView.nullText");
-	private static String voidText=Properties.getMessage("fr.loria.madynes.animjavaexec.view2.NameValueView.voidText");
+        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.NameValueView.objectInstanceFormat"));
+	private static String nullText=Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.NameValueView.nullText");
+	private static String voidText=Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.NameValueView.voidText");
 	
 	private LinkView linkStart;
 	

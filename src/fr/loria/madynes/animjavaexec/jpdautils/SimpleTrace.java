@@ -1,6 +1,5 @@
 package fr.loria.madynes.animjavaexec.jpdautils;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
@@ -30,7 +29,7 @@ import com.sun.jdi.request.WatchpointRequest;
 
 public class SimpleTrace {
 	private VirtualMachine vm;
-	private JdiEventDispatcherThread dt=null;
+	private JdiEventDispatcherThread dt=null; 
 	private OutputReaderThread stdOutReader;
 	private OutputReaderThread stdErrReader;
 	//private OutputStream buffuredStdIn=null;

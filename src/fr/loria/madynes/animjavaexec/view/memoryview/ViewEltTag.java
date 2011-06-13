@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import fr.loria.madynes.animjavaexec.execution.model.StackEltTag;
 

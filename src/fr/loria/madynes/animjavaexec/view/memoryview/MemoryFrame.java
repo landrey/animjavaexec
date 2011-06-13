@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -34,7 +34,7 @@ import fr.loria.madynes.javautils.swing.JFramePropertiesMgr;
 // TODO: add what needed to get a correct scroll bar management...
 public class MemoryFrame extends JFrame  implements CommandGenerator, ComponentListener {
 	private static final long serialVersionUID = 1L;
-	private static String alwaysOnTopKey="fr.loria.madynes.animjavaexec.view2.MemoryFrame.alwaysontop"; // key Properties
+	private static String alwaysOnTopKey="fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame.alwaysontop"; // key Properties
 	private MemoryView mv;
 	private CommandForwarder commandForwarder;
 	// Always on top property, frame behavior and  menu item...
@@ -47,7 +47,7 @@ public class MemoryFrame extends JFrame  implements CommandGenerator, ComponentL
 		if (wIcone!=null){
 			this.setIconImage(wIcone);
 		}
-		JFramePropertiesMgr.manage(this, Properties.getDefaultProperties(), "fr.loria.madynes.animjavaexec.view2.MemoryFrame");
+		JFramePropertiesMgr.manage(this, Properties.getDefaultProperties(), "fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		//setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//this.mv=new MemoryView(c, r);
@@ -91,7 +91,7 @@ public class MemoryFrame extends JFrame  implements CommandGenerator, ComponentL
 		JMenuBar menuBar=new JMenuBar();
 		JMenu fileMenu=new JMenu(Properties.getMessage("fr.loria.madynes.animjavaexec.view.filemenu.name"));
 		JMenuItem printMenu=new JMenuItem(new ActionFromProperties(
-				"fr.loria.madynes.animjavaexec.view2.MemoryFrame.printaction",
+				"fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame.printaction",
 				"printsh",
 				new ActionListener(){
 					@Override
@@ -124,7 +124,7 @@ public class MemoryFrame extends JFrame  implements CommandGenerator, ComponentL
 		JMenu viewMenu=new JMenu(Properties.getMessage("fr.loria.madynes.animjavaexec.view.viewmenu.name"));
 		// We are not using command forward: event local to this JFrame and its content...
 		JMenuItem zoomInMenuItem=new JMenuItem(new ActionFromProperties(
-				"fr.loria.madynes.animjavaexec.view2.MemoryFrame.zoominaction",
+				"fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame.zoominaction",
 				"zoomin",
 			new ActionListener(){
 				@Override
@@ -134,7 +134,7 @@ public class MemoryFrame extends JFrame  implements CommandGenerator, ComponentL
 			}));
 		viewMenu.add(zoomInMenuItem);
 		JMenuItem zoomOutMenuItem=new JMenuItem(new ActionFromProperties(
-				"fr.loria.madynes.animjavaexec.view2.MemoryFrame.zoomoutaction",
+				"fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame.zoomoutaction",
 				"zoomout",
 			new ActionListener(){
 				@Override
@@ -147,7 +147,7 @@ public class MemoryFrame extends JFrame  implements CommandGenerator, ComponentL
 		if (this.isAlwaysOnTopSupported()){
 			viewMenu.addSeparator();
 			alwaysOnTopMenuItem=new JCheckBoxMenuItem(new ActionFromProperties(
-				"fr.loria.madynes.animjavaexec.view2.MemoryFrame.alwaysontopaction",
+				"fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame.alwaysontopaction",
 				"alwaysontop",
 				new ActionListener(){
 					@Override

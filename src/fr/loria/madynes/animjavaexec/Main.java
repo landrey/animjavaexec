@@ -49,7 +49,7 @@ import com.sun.jdi.request.EventRequestManager;
 import com.sun.jdi.request.ExceptionRequest;
 import com.sun.jdi.request.MethodEntryRequest;
 import com.sun.jdi.request.MethodExitRequest;
-import com.sun.jdi.request.ModificationWatchpointRequest;
+import com.sun.jdi.request.ModificationWatchpointRequest; 
 import com.sun.jdi.request.StepRequest;
 
 import fr.loria.madynes.animjavaexec.execution.model.ExecutionModel;
@@ -60,15 +60,15 @@ import fr.loria.madynes.animjavaexec.jpdautils.VMOutputListener;
 import fr.loria.madynes.animjavaexec.jpdautils.ValueAccess;
 import fr.loria.madynes.animjavaexec.jpdautils.ValueAccessor;
 import fr.loria.madynes.animjavaexec.view.SourceFrame;
-import fr.loria.madynes.animjavaexec.view2.FiltersFrame;
-import fr.loria.madynes.animjavaexec.view2.MemoryFrame;
+import fr.loria.madynes.animjavaexec.view.memoryview.FiltersFrame;
+import fr.loria.madynes.animjavaexec.view.memoryview.MemoryFrame;
 import fr.loria.madynes.javautils.Properties;
 import fr.loria.madynes.javautils.PropertiesPreferencesEditor;
 
 
 public class Main {
 
-	private String mainSignature; // todo: in properties...
+	private String mainSignature; // TODO: in properties...
 	
 	///TODO: remove, debug.
 	private static DisplayValue displayValue=new DisplayValue();

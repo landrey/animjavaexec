@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import java.awt.Font;
 import java.text.MessageFormat;
@@ -12,9 +12,9 @@ import fr.loria.madynes.javautils.Properties;
 public class InstanceView extends InstanceOrArrayView {
 	private static final long serialVersionUID = 1L;
 	private static MessageFormat headerFormat=
-        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.InstanceView.headerFormat"));
+        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.InstanceView.headerFormat"));
 	private static MessageFormat headerTipFormat=
-        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.InstanceView.headerTipFormat"));
+        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.InstanceView.headerTipFormat"));
 	//private static Color instanceHeadColor=Color.cyan;
 	//private static Color fieldColor=Color.MAGENTA; 
 	

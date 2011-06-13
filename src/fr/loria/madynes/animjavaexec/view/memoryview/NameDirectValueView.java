@@ -1,10 +1,10 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import java.awt.Color;
 
 import com.sun.jdi.Value;
 
-import fr.loria.madynes.animjavaexec.view2.NameNotFixedValueView.ValueView;
+import fr.loria.madynes.animjavaexec.view.memoryview.NameNotFixedValueView.ValueView;
 
 
 /**

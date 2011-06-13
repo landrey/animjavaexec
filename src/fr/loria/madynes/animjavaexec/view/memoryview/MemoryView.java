@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -71,30 +71,30 @@ public class MemoryView extends JPanel  implements
 	// model.StackEltTag: THIS, PARAM, VAR, RETURN, SEPARATOR;
 	// view2.ViewEltTag: THIS, PARAM, VAR, RETURN, SEPARATOR, ARRAY_HEADER, ARRAY_LENGTH, ARRAY_ELT, INSTANCE_HEADER, INSTANCE_VAR;
 	private static final String[] viewEltColorKey={
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.thiscolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.paramcolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.variablecolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.returncolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.separatorcolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.arrayheadercolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.arraylengthcolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.arrayeltcolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.instanceheadercolor",
-	   "fr.loria.madynes.animjavaexec.view2.MemoryView.instancevariablecolor"
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.thiscolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.paramcolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.variablecolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.returncolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.separatorcolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.arrayheadercolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.arraylengthcolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.arrayeltcolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.instanceheadercolor",
+	   "fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.instancevariablecolor"
 	};
 	// stack elt, array elt, instance attributes...
-	private static final String stackEltFontNameKey=	"fr.loria.madynes.animjavaexec.view2.MemoryView.stackeltfontname";
-	private static final String stackEltFontSizeKey=	"fr.loria.madynes.animjavaexec.view2.MemoryView.stackeltfontsize";
+	private static final String stackEltFontNameKey=	"fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.stackeltfontname";
+	private static final String stackEltFontSizeKey=	"fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.stackeltfontsize";
 	// array or instance header
-	private static final String headerFontNameKey=		"fr.loria.madynes.animjavaexec.view2.MemoryView.headerfontname";
-	private static final String headerFontSizeKey=		"fr.loria.madynes.animjavaexec.view2.MemoryView.headerfontsize";
-	private static final String widthHeightRatioKey=	"fr.loria.madynes.animjavaexec.view2.MemoryView.widthheightratio";
-	private static final String extraHeightPerCentKey=	"fr.loria.madynes.animjavaexec.view2.MemoryView.extraheightpercent";
+	private static final String headerFontNameKey=		"fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.headerfontname";
+	private static final String headerFontSizeKey=		"fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.headerfontsize";
+	private static final String widthHeightRatioKey=	"fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.widthheightratio";
+	private static final String extraHeightPerCentKey=	"fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.extraheightpercent";
 	
 	// view2.ViewEltTag: THIS, PARAM, VAR, RETURN, SEPARATOR, ARRAY_HEADER, ARRAY_LENGTH, ARRAY_ELT, INSTANCE_HEADER, INSTANCE_VAR;
 	private Color[] viewEltColor=null;
 	
-	private static final String callLabel=Properties.getMessage("fr.loria.madynes.animjavaexec.view2.MemoryView.callLabel");
+	private static final String callLabel=Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.callLabel");
 	private Observer stackObserver=null;
 	private Observer instanceObserver=null;
 	private Observer arrayObserver=null;
@@ -113,11 +113,11 @@ public class MemoryView extends JPanel  implements
 	private static final int instanceCurY0=10;
 	private static final int stackGapFromBottom=20;// TODO: push in properties.
 	private static final int stackHeapXgap=10; // TODO: push in properties.
-	private static final String constructorLabel = Properties.getMessage("fr.loria.madynes.animjavaexec.view2.MemoryView.constructorLabel");
+	private static final String constructorLabel = Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.constructorLabel");
 	private static final MessageFormat calledMethodNameFormat = 
-		new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.MemoryView.calledMethodNameFormat"));
+		new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.calledMethodNameFormat"));
 	private static final MessageFormat calledMethodTipFormat = 
-		new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.MemoryView.calledMethodTipFormat"));
+		new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.MemoryView.calledMethodTipFormat"));
 	// Slots to print instances
 	private int instanceCurX=150;
 	private int instanceCurY=10;

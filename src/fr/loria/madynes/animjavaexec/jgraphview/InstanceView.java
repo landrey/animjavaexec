@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view;
+package fr.loria.madynes.animjavaexec.jgraphview;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
@@ -17,6 +17,7 @@ import org.jgraph.graph.GraphModel;
 import com.sun.jdi.Field;
 import com.sun.jdi.ObjectReference;
 import com.sun.jdi.Value;
+
 
 class InstanceView extends InstanceOrArrayView {
 	static private final Color instanceLabelColor=Color.PINK;    //TODO: externalize (ressource bundle). 

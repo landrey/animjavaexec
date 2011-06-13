@@ -1,4 +1,4 @@
-package fr.loria.madynes.animjavaexec.view2;
+package fr.loria.madynes.animjavaexec.view.memoryview;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,9 +11,9 @@ import fr.loria.madynes.javautils.Properties;
 public class ArrayView extends InstanceOrArrayView {
 	private static final long serialVersionUID = 1L;
 	private static MessageFormat headerFormat=
-        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.ArrayView.headerFormat"));
+        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.ArrayView.headerFormat"));
 	private static MessageFormat headerTipFormat=
-        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view2.ArrayView.headerTipFormat"));
+        new  MessageFormat(Properties.getMessage("fr.loria.madynes.animjavaexec.view.memoryview.ArrayView.headerTipFormat"));
 	//private static final Color arrayHeaderColor=Color.pink; 
 	//private static Color lengthColor=Color.yellow;
 	//private static Color eltColor=Color.ORANGE; // TODO: push to properties.
