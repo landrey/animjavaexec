@@ -1,13 +1,32 @@
 <project name="animjavaexec" basedir="." default="main">
 	<property name="src.dir"	value="src"/>
 	<property name="bin.dir"   	value="bin"/>
-	<property name="jar.dir"    value="${bin.dir}/jar"/>
-	<property name="main-class" value="fr.loria.madynes.animjavaexec.Main"/>
+	<property name="jar.dir"        value="${bin.dir}/jar"/>
+	<property name="externals.dir"  value="./externals"/>
+	<property name="javautils.name" value="fr.loria.madynes.javautils.jar"/>
+	<property name="main-class"     value="fr.loria.madynes.animjavaexec.Main"/>
+	<property name="jarfile.name"   value="fr.loria.madynes.animjavaexec.jar"/>
+	<property name="jarfile.dir"    value="."/>
 
+	<path id="compile.class.path">
+	  <pathelement location="${externals.dir}/${javautils.name}"/>
+	</path>
 
-	<target name="compile" depends="resources">
-		<mkdir dir="${classes.dir}"/>
-	    <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+	<path id="run.class.path">
+	  <pathelement location="${externals.dir}/${javautils.name}"/>
+	  <pathelement location="${jarfile.dir}/${jarfile.name}"/>
+	  <pathelement path="${java.class.path}"/>
+	  <pathelement location="."/>
+	</path>
+
+	<!-- externals -->
+	<target name="compile" depends="resources"> 
+ 		<mkdir dir="${bin.dir}"/>
+		<javac srcdir="${src.dir}" 
+		   destdir="${bin.dir}"
+		   excludes="fr/loria/madynes/animjavaexec/jgraphview/**"
+		   classpathref="compile.class.path"
+		   debug="on" />
 	</target>
 
 	<target name="resources">
@@ -35,19 +54,43 @@
 	</target>
 	
 
-    <target name="tools">
-    	<available  classname="com.sun.jdi.VirtualMachine" property="test.prop"/>
+	<target name="tools">
+    	  <available  classname="com.sun.jdi.VirtualMachine" property="test.prop"/>
 		<echo message="Test: ${test.prop}">
 			Test: ${test.prop}
 		</echo>
     	<!-- <echoproperties></echoproperties> -->
-    </target>
+	</target>
 
-	<javac srcdir="${src.dir}"
-	         destdir="${bin.dir}"
-	         debug="on"
-	  />
+	<target name="externals">
+	  <!--
+	  <get  src="https://github.com/downloads/landrey/JavaUtils/fr.loria.madynes.javautils.jar"
+		dest="${externals.dir}/${javautils.name}"
+		verbose="on"
+		usetimestamp="false"
+		/>
+	  -->
+	  <exec executable="wget">
+	    <arg value="https://github.com/downloads/landrey/JavaUtils/fr.loria.madynes.javautils.jar"/>
+	    <arg value="--output-document=${externals.dir}/${javautils.name}" />
+	  </exec>
+	</target>
     <!-- classpath="xyz.jar" -->
-	<target name="main" depends="clean"/>
+    <target name="main" depends="clean"/>
+    
+    <target name="jar">
+      <jar destfile="${jarfile.dir}/${jarfile.name}"
+	   basedir="${bin.dir}"
+       />
+    </target>
+    <target name="run" depends="jar">
+      <java classname="${main-class}"
+	    classpathref="run.class.path"
+	    fork="true"
+      />
+    </target>
+    <target name="proot">
+      <echo message="${java.class.path}" />
+    </target>
 </project>
 
