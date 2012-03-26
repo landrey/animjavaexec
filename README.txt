@@ -5,10 +5,10 @@ Explanations:
 
 This utility is a kind of debugger (a jdi client indeed !) where
 the user can basically step-line, staying in the main class package and 
-when get a feedback: source display with highlighted current line and 
+when gets a feedback: source display with highlighted current line and 
 a graphic display for execution stack, class instances and array instances.
 
-Variables, fields, array element what are object or array references
+Variables, fields, array elements what are object or array references
 are displayed as arrows and labels (object id based on object
 hash). So stack and instances form an oriented graph.
 
