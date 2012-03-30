@@ -1,9 +1,16 @@
 package fr.loria.madynes.animjavaexec.execution.model;
 
+import java.text.MessageFormat;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import fr.loria.madynes.animjavaexec.Main;
+import fr.loria.madynes.javautils.Properties;
 
 public class StateManager extends Observable {
 	// States
+	// TODO: go for enumerate...
 	public static final int INIT=0;
 	/**  a "step" button  should disable when on this state
 	 */
@@ -17,6 +24,8 @@ public class StateManager extends Observable {
 	
 	// For FINISHED
 	public static final int FORRESTART=0;
+	
+	private static final String[] STATE_TO_STR={"INIT", "STEPPING", "ON_STEP", "FINISHED", 	"FORRESTART"};
 	
 	private int state=INIT;
 	private ExecutionModel execModel;
@@ -34,7 +43,10 @@ public class StateManager extends Observable {
 		}else if(!needStep&&this.state==ON_STEP){
 			this.state=STEPPING;
 		}else{
-			System.out.println(this.getClass().getName()+": cannot do this on current state");//todo: log and better info.
+			Logger.getLogger("").logp(Level.WARNING,
+					Main.class.getClass().getName(), "setNeedStep",
+					MessageFormat.format(Properties.getOptionalMessage(Main.class.getClass().getName()+".cannotstep", "can not step {0} on current state {1}"),
+							needStep, STATE_TO_STR[this.state]));
 		}
 		if (odlState!=this.state){
 			this.setChanged();

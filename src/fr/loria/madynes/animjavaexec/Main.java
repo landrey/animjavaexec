@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Frame;
 import java.io.FileNotFoundException;
 import java.text.MessageFormat;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -67,7 +69,8 @@ import fr.loria.madynes.javautils.PropertiesPreferencesEditor;
 
 
 public class Main {
-
+	private static final String logLevelKey="fr.loria.madynes.animjavaexec.Main.loglevel";
+	
 	private String mainSignature; // TODO: in properties...
 	
 	///TODO: remove, debug.
@@ -207,14 +210,23 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		// Conf log first (use by Properties package).
-		//TODO: find a standard way to configure this:
+		// Log all when intializing properties stuff.
 		Logger.getLogger("").setLevel(Level.ALL);
 		//Logger.getLogger("").setLevel(Level.WARNING);
 		Properties.setMessages("fr.loria.madynes.animjavaexec.MessagesBundle");
 		Properties.setDefaultProperties("fr.loria.madynes.animjavaexec.resources");
 		// Properties.setProperties("fr.loria.madynes.animjavaexec.resources");
+		// Set LogLevel 
+		Logger.getLogger("").setLevel(Properties.getDefaultProperties().getOptionalLogLevelProperty(logLevelKey, Level.ALL));
+		// Listen for change to LogLevel property
 		
+		Properties.getDefaultProperties().addKeyObserver(logLevelKey, new Observer(){
+			@Override
+			public void update(Observable o, Object arg){
+				Properties.PropertyChangedEvent evt=(Properties.PropertyChangedEvent)arg;
+				// setLevel does not care if level is null...
+				Logger.getLogger("").setLevel(Properties.getDefaultProperties().getOptionalLogLevelProperty(evt.getKey(), Level.ALL)); // ou logLevelKey
+			}});
 		
 		Main main=new Main();
 		 // TODO: better parsing for  options and args.
@@ -234,7 +246,6 @@ public class Main {
 				main.sf.setClassText(className);
 			}
 			// ?  Source and Memory Frame are there... Just wait for user interaction...
-			// Use a property to keep the last run class ?
 		}
 	}//main
 	
