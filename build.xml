@@ -76,7 +76,8 @@
 	  </exec>
 	</target>
     <!-- classpath="xyz.jar" -->
-    <target name="main" depends="clean"/>
+    <target name="main" depends="clean">
+    </target>
     
     <target name="jar">
       <jar destfile="${jarfile.dir}/${jarfile.name}"
