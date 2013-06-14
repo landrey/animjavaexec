@@ -227,9 +227,18 @@ public class Main {
 				// setLevel does not care if level is null...
 				Logger.getLogger("").setLevel(Properties.getDefaultProperties().getOptionalLogLevelProperty(evt.getKey(), Level.ALL)); // ou logLevelKey
 			}});
-		
+		Logger.getLogger("").logp(Level.INFO, 
+				Main.class.getClass().getName(), "main",
+				MessageFormat.format(Properties.getOptionalMessage("fr.loria.madynes.animjavaexec.jvmInfo", 
+						"{0}={1} ; {2}={3} ; {4}={5} ; {6}={7}"),
+						"java.vendor", System.getProperty("java.vendor"),
+						"java.home", System.getProperty("java.home"), 
+						"java.version", System.getProperty("java.version"),
+						"java.class.path", System.getProperty("java.class.path"))
+				);
+		System.out.print("====> "+System.getProperty("java.vendor"));
 		Main main=new Main();
-		 // TODO: better parsing for  options and args.
+		 // TODO: better parsing for  options and args. Use getOpt
 		
 		if (args.length>0){
 			//main.runExec(args[0]); // For now argument = main class.
